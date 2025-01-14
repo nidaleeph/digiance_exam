@@ -37,6 +37,16 @@ To set the encryption key for your application, run:
 php artisan key:generate --ansi
 ```
 
+Then refresh config
+
+```bash
+php artisan config:clear
+```
+
+```bash
+php artisan config:cache
+```
+
 ## Populate the Database with Seeders
 
 To migrate the database and seed initial data, use:
