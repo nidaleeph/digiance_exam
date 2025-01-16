@@ -250,7 +250,7 @@ async function confirmCardPayment() {
 
         paymentMethodId.value = paymentMethod.id;
 
-        const { data } = await axiosClient.post("/create-payment-intent", {
+        const { data } = await axiosClient.post("/create-payment-details", {
             payment_method_id: paymentMethodId.value,
         });
 

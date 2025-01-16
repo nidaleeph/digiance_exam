@@ -19,7 +19,7 @@ Route::group(['middleware' => ['web']], function () {
 
 
         Route::get('/payments/history', [PaymentController::class, 'paymentHistory']);
-        Route::post('/create-payment-intent', [PaymentController::class, 'createPaymentIntent']);
+        Route::post('/create-payment-details', [PaymentController::class, 'createPaymentDetails']);
 
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::get('/get-user', [AuthController::class, 'getLoggedInUser']);

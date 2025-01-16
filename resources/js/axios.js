@@ -18,7 +18,7 @@ const endpointDescriptions = {
     "/subscription/update": "Updating user subscription details",
     "/payments/subscribe": "Subscribing the user to a plan",
     "/payments/history": "Fetching payment history",
-    "/create-payment-intent": "Creating a payment intent",
+    "/create-payment-details": "Creating a payment details",
 };
 
 axiosClient.interceptors.request.use((config) => {

@@ -19,7 +19,7 @@ use App\Models\Subscription;
 class PaymentController extends Controller
 {
 
-    public function createPaymentIntent(Request $request)
+    public function createPaymentDetails(Request $request)
     {
         $request->validate([
             'payment_method_id' => 'required|string',
