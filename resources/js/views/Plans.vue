@@ -176,8 +176,10 @@ function showNotification(message, isError = false) {
 
 onMounted(async () => {
     try {
-        const user = await store.dispatch("getUser");
-        subscription.value = user.subscription ?? null;
+        if (token.value) {
+            const user = await store.dispatch("getUser");
+            subscription.value = user.subscription ?? null;
+        }
         const { data } = await axiosClient.get("/plans");
         plans.value = data;
     } catch (err) {
