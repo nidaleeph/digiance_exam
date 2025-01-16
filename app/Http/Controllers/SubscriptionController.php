@@ -142,7 +142,6 @@ class SubscriptionController extends Controller
     public function subscribe(Request $request)
     {
         $request->validate([
-            'payment_method_id' => 'required|string',
             'plan_id' => 'required|numeric',
         ]);
 
@@ -162,10 +161,6 @@ class SubscriptionController extends Controller
             DB::beginTransaction();
 
             $stripeCustomer = $user->createOrGetStripeCustomer();
-
-            Customer::update($stripeCustomer->id, [
-                'invoice_settings' => ['default_payment_method' => $request->payment_method_id],
-            ]);
 
             $stripeSubscription = StripeSubscription::create([
                 'customer' => $stripeCustomer->id,

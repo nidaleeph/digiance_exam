@@ -160,7 +160,6 @@ let stripe = null;
 let cardElement = null;
 
 const clientSecret = ref(null);
-const paymentMethodId = ref(null);
 
 const notification = ref({
     message: "",
@@ -248,10 +247,8 @@ async function confirmCardPayment() {
             return;
         }
 
-        paymentMethodId.value = paymentMethod.id;
-
         const { data } = await axiosClient.post("/create-payment-details", {
-            payment_method_id: paymentMethodId.value,
+            payment_method_id: paymentMethod.id,
         });
 
         await finalizeSubscription(selectedPlan.value.id);
@@ -264,7 +261,6 @@ async function confirmCardPayment() {
 async function finalizeSubscription(planId) {
     try {
         const { data } = await axiosClient.post("/subscribe", {
-            payment_method_id: paymentMethodId.value,
             plan_id: planId,
         });
         showNotification(data.message || "Subscription successful!");
