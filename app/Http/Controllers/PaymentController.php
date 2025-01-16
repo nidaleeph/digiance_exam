@@ -58,6 +58,10 @@ class PaymentController extends Controller
         $user = Auth::user();
         Stripe::setApiKey(config('services.stripe.secret'));
 
+        if (!$user->stripe_id) {
+            return response()->json(['message' => 'No payment history']);
+        }
+
         $paymentIntents = PaymentIntent::all([
             'customer' => $user->stripe_id,
         ]);
@@ -69,11 +73,8 @@ class PaymentController extends Controller
             foreach ($paymentIntents->data as $paymentIntent) {
 
                 $invoice = Invoice::retrieve($paymentIntent->invoice);
-
                 $lastLineItem = end($invoice->lines->data);
-
                 $stripePriceId = $lastLineItem->price->id ?? null;
-
                 $plan = Plan::where('stripe_price_id', $stripePriceId)->first();
 
                 if (!$plan) {
