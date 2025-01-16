@@ -1,6 +1,11 @@
 export default {
     user: {
-        token: localStorage.getItem("TOKEN"),
+        // Fetch token from localStorage, clear any leftover from sessionStorage
+        token: (() => {
+            const token = localStorage.getItem("TOKEN");
+            sessionStorage.removeItem("TOKEN");
+            return token;
+        })(),
         data: {},
     },
     loading: {
