@@ -1,6 +1,6 @@
 export default {
     user: {
-        token: sessionStorage.getItem("TOKEN"),
+        token: localStorage.getItem("TOKEN"),
         data: {},
     },
     loading: {
