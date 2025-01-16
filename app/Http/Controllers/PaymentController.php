@@ -64,8 +64,9 @@ class PaymentController extends Controller
 
         try {
 
-            foreach ($paymentIntents->data as $paymentIntent) {
+            DB::beginTransaction();
 
+            foreach ($paymentIntents->data as $paymentIntent) {
 
                 $invoice = Invoice::retrieve($paymentIntent->invoice);
 
